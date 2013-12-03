@@ -1,0 +1,28 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-gegl0.2"
+VERSION=0.2.0
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Generic Graphics Library for Win64 toolchain"
+DESCRIPTION="GEGL (Generic Graphics Library) is a graph based image processing
+framework.  GEGL provides infrastructure to do demand based cached
+non-destructive image editing on larger than RAM buffers."
+HOMEPAGE="http://www.gegl.org/"
+SRC_URI="ftp://ftp.gimp.org/pub/gegl/${VERSION%.*}/gegl-${VERSION}.tar.bz2"
+SRC_DIR="gegl-${VERSION}"
+PATCH_URI="
+	http://pkgs.fedoraproject.org/cgit/gegl.git/plain/gegl-0.2.0-CVE-2012-4433.patch
+	http://pkgs.fedoraproject.org/cgit/gegl.git/plain/gegl-0.2.0-remove-src-over-op.patch
+"
+
+CYGCONF_ARGS="
+	--disable-docs
+	--disable-introspection
+	--without-libavformat
+	--without-libv4l
+	lt_cv_deplibs_check_method=pass_all
+"
+
+KEEP_LA_FILES="none"
